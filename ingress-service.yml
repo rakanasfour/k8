@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mongo-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: rakanprojects.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mongo-frontend-service
+            port:
+              number: 80
+      - path: /items
+        pathType: Prefix
+        backend:
+          service:
+            name: mongo-backend-service
+            port:
+              number: 80
